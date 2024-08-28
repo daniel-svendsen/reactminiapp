@@ -1,38 +1,30 @@
+// src/pages/Login.tsx
+
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../utils/authUtils';
 import '../css/App.css';
 
-function Login({ onLoginSuccess }) {
+interface LoginProps {
+  onLoginSuccess: () => void;
+}
+
+function Login({ onLoginSuccess }: LoginProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleSignIn = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8080/v1/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-        credentials: 'include', // Inkludera cookies med begäran
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Login failed');
-      }
-
-      const responseData = await response.json();
-      console.log('Login response data:', responseData);
-
-      // Om servern skickar en lyckad inloggning, förvänta att cookies är hanterade av webbläsaren
+      await login(username, password);
       onLoginSuccess();
-    } catch (err) {
-      console.error('Login error:', err);
+      navigate('/home');
+    } catch (err: any) {
       setError(err.message);
     } finally {
       setLoading(false);

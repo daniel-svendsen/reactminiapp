@@ -1,3 +1,5 @@
+// src/App.tsx
+
 import { useState, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
@@ -6,26 +8,22 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Customers from './pages/Customers';
 import Vehicles from './pages/Vehicles';
+import { verifyUser, logout } from './utils/authUtils';
 
 const queryClient = new QueryClient();
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [userId, setUserId] = useState<number | null>(null); // Håll koll på användarens ID
+  const [userId, setUserId] = useState<number | null>(null);
 
   useEffect(() => {
-    const verifyUser = async () => {
+    const checkUser = async () => {
       try {
-        const response = await fetch('http://localhost:8080/v1/auth/verify', {
-          method: 'GET',
-          credentials: 'include', // Inkludera cookies med begäran
-        });
-
-        if (response.ok) {
-          const data = await response.json();
+        const user = await verifyUser();
+        if (user) {
           setIsLoggedIn(true);
-          setUserId(data.id); // Antag att servern returnerar användarens ID
+          setUserId(user.id);
         } else {
           setIsLoggedIn(false);
         }
@@ -37,35 +35,22 @@ function App() {
       }
     };
 
-    verifyUser();
+    checkUser();
   }, []);
 
   const handleLogout = async () => {
-    if (userId === null) {
-      console.error('No user ID available for logout');
-      return;
-    }
-
     try {
-      const response = await fetch(`http://localhost:8080/v1/auth/signout/${userId}`, {
-        method: 'POST',
-        credentials: 'include', // Inkludera cookies med begäran
-      });
-
-      if (response.ok) {
-        setIsLoggedIn(false);
-        setUserId(null); // Rensa användarens ID
-        localStorage.removeItem('token'); // Rensa token om den finns i localStorage
-      } else {
-        console.error('Logout failed:', response.statusText);
-      }
+      await logout(userId);
+      setIsLoggedIn(false);
+      setUserId(null);
+      localStorage.removeItem('token'); // Rensa token om den finns i localStorage
     } catch (error) {
       console.error('Logout error:', error);
     }
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Hantera en laddningstillstånd om nödvändigt
+    return <div>Loading...</div>;
   }
 
   if (!isLoggedIn) {
