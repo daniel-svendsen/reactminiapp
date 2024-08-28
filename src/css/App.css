@@ -1,0 +1,110 @@
+/* Body och html täcker hela fönstret och har bakgrundsbilden */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url('../assets/images/Hjulverkstan4.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box; /* Säkerställer att padding/margins inte påverkar storlek på element */
+}
+
+.meny-container{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  max-width: 10%;
+  width: 50%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9); /* Halvtransparent bakgrund för kontrast mot bakgrundsbilden */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Centrerar inloggningsformuläret och ger det en snygg ram och skugga */
+.login-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9); /* Halvtransparent bakgrund för kontrast mot bakgrundsbilden */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titel för inloggningsformuläret */
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Stil för inmatningsfälten */
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Stil för knappen */
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Stil för knappen när den är inaktiverad */
+.login-container button:disabled {
+  background-color: #6c757d;
+}
+
+/* Stil för knappen när man hovrar över den */
+.login-container button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* Stil för felmeddelanden */
+.login-container p {
+  color: red;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.vehicles-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.vehicles-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.vehicles-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.vehicle-item {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
