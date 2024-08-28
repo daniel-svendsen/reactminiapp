@@ -15,6 +15,16 @@ body, html {
   box-sizing: border-box; /* Säkerställer att padding/margins inte påverkar storlek på element */
 }
 
+.content-container{
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9); /* Halvtransparent bakgrund för kontrast mot bakgrundsbilden */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 .meny-container{
   position: absolute;
   top: 20px;

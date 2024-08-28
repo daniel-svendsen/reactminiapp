@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../utils/authUtils';
+import { login } from '../utils/AuthUtils.tsx';
 import '../css/App.css';
 
 interface LoginProps {

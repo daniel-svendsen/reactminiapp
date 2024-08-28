@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Customers from './pages/Customers';
 import Vehicles from './pages/Vehicles';
-import { verifyUser, logout } from './utils/authUtils';
+import { verifyUser, logout } from './utils/AuthUtils.tsx';
 
 const queryClient = new QueryClient();
 

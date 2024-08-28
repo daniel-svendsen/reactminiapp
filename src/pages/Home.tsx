@@ -1,8 +1,8 @@
 //pages/StartPage.tsx
 function Home() {
   return (
-    <div className="start-page">
-      <h1>hej</h1>
+    <div className="content-container">
+      <h1>Hej</h1>
     </div>
   );
 }

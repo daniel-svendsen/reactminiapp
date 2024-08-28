@@ -1,8 +1,9 @@
 // src/utils/authUtils.ts
+import API_BASE_URL from './BaseUrl.tsx';
 
 // Funktion för att logga in
 export const login = async (username: string, password: string): Promise<void> => {
-  const response = await fetch('http://localhost:8080/v1/auth/login', {
+  const response = await fetch(`${API_BASE_URL}auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -23,7 +24,7 @@ export const logout = async (userId: number | null): Promise<void> => {
     throw new Error('No user ID available for logout');
   }
 
-  const response = await fetch(`http://localhost:8080/v1/auth/signout/${userId}`, {
+  const response = await fetch(`${API_BASE_URL}auth/signout/${userId}`, {
     method: 'POST',
     credentials: 'include',
   });
@@ -35,7 +36,7 @@ export const logout = async (userId: number | null): Promise<void> => {
 
 // Funktion för att verifiera användaren
 export const verifyUser = async (): Promise<{ id: number } | null> => {
-  const response = await fetch('http://localhost:8080/v1/auth/verify', {
+  const response = await fetch(`${API_BASE_URL}auth/verify`, {
     method: 'GET',
     credentials: 'include',
   });
